@@ -45,7 +45,7 @@ Text Codex is a serverless Cloudflare Worker that connects a user's agent to SMS
 
 #### Recommended: let an agent install everything
 
-For a guided end-to-end setup, open [INSTALL_WITH_AGENT.md](INSTALL_WITH_AGENT.md), copy its ready-made prompt into a coding agent with terminal and browser access, and follow along. The agent is instructed to clone the project, configure Cloudflare D1, Pingram, Google OAuth, and Worker secrets, deploy the app, and verify the live service.
+For a guided end-to-end setup, open [INSTALL_WITH_AGENT.md](INSTALL_WITH_AGENT.md), copy its ready-made prompt into a coding agent with terminal and browser access, and follow along. The agent is instructed to clone the project, configure Cloudflare D1, Pingram, Google OAuth, and Worker secrets, deploy the app, install a persistent Codex bridge, and verify a real SMS-triggered Codex task.
 
 #### Manual installation
 

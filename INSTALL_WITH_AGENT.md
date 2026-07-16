@@ -55,7 +55,18 @@ Complete these phases:
    - Open the live site and have me complete Google sign-in. Verify that the authenticated app loads.
    - Verify Pingram number search works. Before ordering anything, show me the available number and recurring price and ask for explicit approval.
    - If I approve the charge, claim the number, send a real inbound SMS from my verified source number, confirm it appears through the agent inbox API, send a short reply through the agent reply API, and confirm it reaches my phone.
-   - Have me copy the generated Markdown agent-connection instructions into the agent I actually want to receive texts. Warn me that this Markdown contains a bearer token and must remain private.
+   - Retrieve the generated Markdown agent-connection instructions securely. Warn me that this Markdown contains a bearer token and must remain private.
+
+6. Install the persistent Codex bridge
+   - Do not stop after copying the connection Markdown. An already-open Codex desktop conversation cannot receive asynchronous SMS by itself. Install a persistent, headless bridge that polls the Text Codex agent inbox, invokes Codex with the requested task, and posts the result through the agent reply API.
+   - Ask which machine should run the bridge. Prefer one always-on machine for the simplest setup. Use an OS-native background service: a hidden Task Scheduler task on Windows or a hardened systemd service on Linux. Configure automatic startup and restart on failure.
+   - Keep the Text Codex bearer token and any Codex credentials out of source files, logs, process arguments, and shell history. Store them in the platform's protected secret mechanism or an existing password manager integration.
+   - Restrict execution to messages from the source phone already verified by Text Codex. Treat SMS content as untrusted user input, preserve Codex's normal approval boundaries, and never weaken machine security to make the bridge unattended.
+   - Add durable idempotency so a restart or overlapping poll cannot execute the same message twice. Import or mark existing inbox messages as handled before enabling the service so old messages are not replayed. Preserve a small amount of recent conversation history per sender so follow-up texts have context.
+   - If I want more than one Codex machine, add a shared coordinator with atomic claims. Let me choose node priority and failover delay. Reuse an authenticated outbound connection such as SSH between nodes; do not expose an inbound port on a personal computer merely for coordination.
+   - Keep each machine's native Codex tools, skills, filesystem, shell, and network access. Do not claim that texts are injected into an already-open desktop conversation; use persistent headless Codex sessions and explain that distinction.
+   - Add automated tests for message parsing, allowlisting, deduplication, claiming, history, reply handling, and failure recovery. Run them before enabling the service.
+   - Verify the installed background task or service is actually running. Then have me send a harmless SMS that requires a real Codex tool call, such as reporting the machine hostname. Confirm exactly one machine claims it, Codex executes it, and the reply reaches my phone.
 
 At the end, give me a concise handoff containing:
 
@@ -63,6 +74,7 @@ At the end, give me a concise handoff containing:
 - the Cloudflare Worker and D1 names;
 - which checks passed;
 - whether an end-to-end SMS round trip passed;
+- the bridge machine or machines, priority order, and service status;
 - any step I intentionally skipped;
 - where to rotate each credential and how to redeploy;
 - a reminder that releasing/replacing a number or deleting paid resources can affect billing.
