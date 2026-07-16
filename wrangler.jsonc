@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "text-codex",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "text-codex-db",
+      "database_id": "caa9b0cb-50a8-4e32-a9f3-b97bca9f454f",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "PUBLIC_URL": "https://text-codex.workers.dev",
+    "PINGRAM_BASE_URL": "https://api.pingram.io"
+  }
+}

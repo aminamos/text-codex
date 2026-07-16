@@ -1,0 +1,22 @@
+{
+  "name": "text-codex",
+  "private": true,
+  "version": "0.1.0",
+  "description": "US-only text-to-agent provisioning on Cloudflare and Pingram",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit",
+    "types": "wrangler types"
+  },
+  "dependencies": {
+    "@better-auth/passkey": "latest",
+    "better-auth": "latest"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "latest",
+    "typescript": "latest",
+    "wrangler": "latest"
+  }
+}
