@@ -2,6 +2,10 @@
 
 Text Codex is a US-only Cloudflare Worker that gives an agent a private SMS number through Pingram. A user signs in, claims a number, verifies the phone they will text from, and copies a user-scoped Markdown connection note into their agent.
 
+## AI disclosure
+
+All code and documentation in this repository, including this README, were generated with AI assistance. Review, test, and secure the project for your own environment before deploying or relying on it.
+
 ## Safety model
 
 - The Pingram API key and webhook secret are Worker secrets only.
