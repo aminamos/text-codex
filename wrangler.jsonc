@@ -14,7 +14,7 @@
     }
   ],
   "vars": {
-    "PUBLIC_URL": "https://text-codex.workers.dev",
+    "PUBLIC_URL": "https://text-codex.a-8c6.workers.dev",
     "PINGRAM_BASE_URL": "https://api.pingram.io"
   }
 }
